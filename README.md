@@ -1,6 +1,6 @@
 # Project: Item Catalog
 
-This project uses a modified version of the [Full Stack Web Developer Nanodegree program virtual machine repository](https://github.com/udacity/fullstack-nanodegree-vm). The main changes was to convert the source code to Python 3, and change the database from SQLite to PostgreSQL.
+This project uses a modified version of the [Item Catalog Project](https://github.com/rccmodena/item_catalog). The main changes was to convert the source code to Python 3, and change the database from SQLite to PostgreSQL.
 
 
 ## How to Contribute
