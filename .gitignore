@@ -1,5 +1,6 @@
 __pycache__
 *.pyc
+env/
 .vagrant
 client_secrets.json
 *.db
