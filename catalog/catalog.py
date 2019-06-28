@@ -36,13 +36,13 @@ import requests
 
 # Google's Client ID
 CLIENT_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
+    open('/var/www/catalog/catalog/client_secrets.json', 'r').read())['web']['client_id']
 
 # Create anti-forgery state token
 @app.route('/login')
 def showLogin():
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
-                    for x in xrange(32))
+                    for x in range(32))
     login_session['state'] = state
     return render_template('login.html', STATE=state)
 
@@ -60,7 +60,7 @@ def google_connect():
 
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+        oauth_flow = flow_from_clientsecrets('/var/www/catalog/catalog/client_secrets.json', scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
@@ -74,7 +74,7 @@ def google_connect():
     url = ('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=%s'
            % access_token)
     h = httplib2.Http()
-    result = json.loads(h.request(url, 'GET')[1])
+    result = json.loads(h.request(url, 'GET')[1].decode('utf-8'))
 
     # If there was an error in the access token info, abort.
     if result.get('error') is not None:

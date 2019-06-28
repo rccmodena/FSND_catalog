@@ -11,7 +11,19 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///item_catalog.db'
+
+POSTGRES = {
+    'user': 'catalog_user',
+    'password': 'catalog2019',
+    'db': 'catalog',
+    'host': 'localhost',
+    'port': '5432',
+}
+
+app.config['DEBUG'] = True
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:\
+%(password)s@%(host)s:%(port)s/%(db)s' % POSTGRES
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
